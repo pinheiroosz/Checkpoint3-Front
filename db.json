@@ -1,15 +1,8 @@
 {
   "clientes": [
-    {
-      "id": "080a",
-      "cpf": "53163884881",
-      "nome": "Matheus Pinheiro",
-      "cep": "04151-070",
-      "endereco": "Rua Afonso da Silva Pinheiro Junior",
-      "numero": "60",
-      "complemento": "Casa",
-      "telefone": "(11) 99110-1315"
-    }
+    
   ],
-  "pedidos": []
+  "pedidos": [
+    
+  ]
 }

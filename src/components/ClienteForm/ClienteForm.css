@@ -101,8 +101,13 @@ h1 {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 1rem 5rem rgba(0, 123, 255, 90);
   animation: scaleUp 0.3s ease-in-out;
+  box-shadow: 0 0 20px 5px rgba(0, 123, 255, 90); 
+  transition: box-shadow 0.3s ease;
+}
+
+.animacao-card.erro {
+  box-shadow: 0 0 20px 5px rgba(255, 0, 0, 90); 
 }
 
 .animacao-card p {

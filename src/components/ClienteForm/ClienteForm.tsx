@@ -5,6 +5,7 @@ import { buscarEnderecoPorCEP } from '../../services/api/viacep';
 import { salvarCliente, buscarClientePorCPF } from '../../services/api/jsonServer';
 import Lottie from 'react-lottie';
 import acceptedAnimation from '../../../public/lottie/accepted-blue.json';
+import declinedAnimation from '../../../public/lottie/declined-red.json';
 import './ClienteForm.css';
 
 const formatarCPF = (cpf: string) => {
@@ -37,6 +38,7 @@ const ClienteForm: React.FC<{ cpfInicial?: string }> = ({ cpfInicial = '' }) => 
   const [complemento, setComplemento] = useState('');
   const [telefone, setTelefone] = useState('');
   const [mostrarAnimacao, setMostrarAnimacao] = useState(false);
+  const [mostrarErroAnimacao, setMostrarErroAnimacao] = useState(false);
 
   const handleBuscarEndereco = async () => {
     try {
@@ -54,7 +56,8 @@ const ClienteForm: React.FC<{ cpfInicial?: string }> = ({ cpfInicial = '' }) => 
     try {
       const clienteExistente = await buscarClientePorCPF(cliente.cpf);
       if (clienteExistente) {
-        alert('Erro: CPF já cadastrado.');
+        setMostrarErroAnimacao(true);
+        setTimeout(() => setMostrarErroAnimacao(false), 2000); 
         return; 
       }
 
@@ -66,10 +69,10 @@ const ClienteForm: React.FC<{ cpfInicial?: string }> = ({ cpfInicial = '' }) => 
       setNumero('');
       setComplemento('');
       setTelefone('');
-      setMostrarAnimacao(true);
+      setMostrarAnimacao(true); 
       setTimeout(() => setMostrarAnimacao(false), 3000); 
     } catch (error) {
-      alert('Erro ao salvar cliente. Tente novamente.');
+      alert('Erro ao salvar. Tente novamente.');
     }
   };
 
@@ -162,7 +165,7 @@ const ClienteForm: React.FC<{ cpfInicial?: string }> = ({ cpfInicial = '' }) => 
             required
           />
         </div>
-        <button type="submit">Salvar Cliente</button>
+        <button type="submit">Salvar Cadastro</button>
       </form>
 
       {mostrarAnimacao && (
@@ -170,7 +173,7 @@ const ClienteForm: React.FC<{ cpfInicial?: string }> = ({ cpfInicial = '' }) => 
           <div className="animacao-card">
             <Lottie
               options={{
-                loop: false,
+                loop: true,
                 autoplay: true,
                 animationData: acceptedAnimation,
                 rendererSettings: {
@@ -181,6 +184,26 @@ const ClienteForm: React.FC<{ cpfInicial?: string }> = ({ cpfInicial = '' }) => 
               width={300}
             />
             <p>Cliente salvo com sucesso!</p>
+          </div>
+        </div>
+      )}
+
+      {mostrarErroAnimacao && (
+        <div className="animacao-overlay">
+          <div className="animacao-card erro">
+            <Lottie
+              options={{
+                loop: true,
+                autoplay: true,
+                animationData: declinedAnimation,
+                rendererSettings: {
+                  preserveAspectRatio: 'xMidYMid slice',
+                },
+              }}
+              height={300}
+              width={300}
+            />
+            <p>Erro: CPF já cadastrado!</p>
           </div>
         </div>
       )}
