@@ -11,6 +11,13 @@ import fritasImage from '../../../public/images/fritas.png';
 import comboImage from '../../../public/images/combo.png';
 import './PedidoForm.css';
 
+const produtos = [
+  { nome: 'Coca-Cola', imagem: cocaColaImage.src, descricao: 'Clássica garrafa de vidro da Coca-Cola, com o icônico rótulo vermelho e gotas de condensação na superfície, transmitindo a sensação de uma bebida gelada e refrescante, perfeita para acompanhar a refeição.' },
+  { nome: 'Hambúrguer Fenomenal', imagem: hamburguerImage.src, descricao: 'Um suculento hambúrguer artesanal com carne grelhada, queijo cheddar derretido, alface fresca, fatias de tomate e cebola roxa, tudo isso em um pão brioche dourado e macio.' },
+  { nome: 'Fritas Incríveis', imagem: fritasImage.src, descricao: 'Porção de batatas fritas artesanais servidas em um saquinho rústico de papel. As batatas são cortadas grossas, crocantes por fora e macias por dentro, com coloração dourada impecável.' },
+  { nome: 'Super Combo', imagem: comboImage.src, descricao: 'Delicie-se com o sabor autêntico e irresistível do nosso Combo Artesanal Especial. Ele reúne tudo o que há de melhor para uma refeição completa e cheia de personalidade!' },
+];
+
 const PedidoForm: React.FC<{ clienteId: number; clienteNome: string }> = ({ clienteId, clienteNome }) => {
   const [produto, setProduto] = useState('');
   const [botaoConcluido, setBotaoConcluido] = useState(false);
@@ -30,11 +37,11 @@ const PedidoForm: React.FC<{ clienteId: number; clienteNome: string }> = ({ clie
     try {
       await salvarPedido(pedido);
       setProduto('');
-      setBotaoConcluido(true); // Ativa o estado de botão concluído
-      setMostrarAnimacao(true); // Exibe a animação
+      setBotaoConcluido(true); 
+      setMostrarAnimacao(true); 
       setTimeout(() => {
         setBotaoConcluido(false);
-        setMostrarAnimacao(false); // Oculta a animação após 3 segundos
+        setMostrarAnimacao(false); 
       }, 3000);
     } catch (error) {
       alert('Erro ao salvar pedido. Tente novamente.');
@@ -45,24 +52,17 @@ const PedidoForm: React.FC<{ clienteId: number; clienteNome: string }> = ({ clie
     const valor = e.target.value;
     setProduto(valor);
 
-    switch (valor) {
-      case 'Coca-Cola':
-        setImagemProduto(cocaColaImage.src);
-        break;
-      case 'Hambúrguer':
-        setImagemProduto(hamburguerImage.src);
-        break;
-      case 'Fritas':
-        setImagemProduto(fritasImage.src);
-        break;
-      case 'Combo':
-        setImagemProduto(comboImage.src);
-        break;
-      default:
-        setImagemProduto(null);
+    const produtoSelecionado = produtos.find((p) => p.nome === valor);
+    if (produtoSelecionado) {
+      setImagemProduto(produtoSelecionado.imagem);
+
+      const descricaoElement = document.querySelector('.produto-descricao');
+      if (descricaoElement) {
+        descricaoElement.textContent = produtoSelecionado.descricao;
+        descricaoElement.classList.add('visivel');
+      }
     }
 
-    // Adiciona a classe expandido para animar a altura
     const formElement = document.querySelector('.pedido-form');
     if (formElement) {
       formElement.classList.add('expandido');
@@ -71,7 +71,7 @@ const PedidoForm: React.FC<{ clienteId: number; clienteNome: string }> = ({ clie
         if (imageElement) {
           imageElement.classList.add('visivel');
         }
-      }, 500); // Aguarda a transição da altura antes de exibir a imagem
+      }, 500);
     }
   };
 
@@ -79,21 +79,23 @@ const PedidoForm: React.FC<{ clienteId: number; clienteNome: string }> = ({ clie
     <>
       <form className="pedido-form" onSubmit={handleSubmit}>
         <h1>Olá, {clienteNome}!</h1>
-        <h2>Realize seu pedido ⤵</h2>
+        <h2>Selecione seu produto 😋⤵</h2>
         <div>
           <select value={produto} onChange={handleProdutoChange} required>
-            <option value="">Selecione seu produto 😋</option>
-            <option value="Coca-Cola">Coca-Cola</option>
-            <option value="Hambúrguer">Hambúrguer</option>
-            <option value="Fritas">Fritas</option>
-            <option value="Combo">Combo</option>
+            <option value="">🍔🍟🥤</option>
+            {produtos.map((produto) => (
+              <option key={produto.nome} value={produto.nome}>
+                {produto.nome}
+              </option>
+            ))}
           </select>
         </div>
         {imagemProduto && (
           <div className="produto-imagem">
-            <Image src={imagemProduto} alt={produto} width={420} height={420} />
+            <Image src={imagemProduto} alt={produto} width={450} height={450} />
           </div>
         )}
+        <div className="produto-descricao"></div>
         <button
           type="submit"
           className={botaoConcluido ? 'botao-concluido' : ''}

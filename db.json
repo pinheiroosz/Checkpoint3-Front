@@ -99,6 +99,16 @@
       "numero": "60",
       "complemento": "casa",
       "telefone": "(11) 99999-9999"
+    },
+    {
+      "id": "9964",
+      "cpf": "531.638.888.88",
+      "nome": "Matheus Pinheiro",
+      "cep": "04151-070",
+      "endereco": "Rua Affonso da Silva Pinheiro Júnior",
+      "numero": "60",
+      "complemento": "casa",
+      "telefone": "(11) 99999-9999"
     }
   ],
   "pedidos": [
@@ -145,7 +155,7 @@
       "id": "f412",
       "clienteId": "ea2f",
       "produto": "Coca-Cola",
-      "status": "Aguardando envio"
+      "status": "Enviado para entrega"
     },
     {
       "id": "e058",
@@ -223,6 +233,42 @@
       "id": "a9f9",
       "clienteId": "3967",
       "produto": "Hambúrguer",
+      "status": "Aguardando envio"
+    },
+    {
+      "id": "48ae",
+      "clienteId": "3967",
+      "produto": "Super Combo",
+      "status": "Aguardando envio"
+    },
+    {
+      "id": "880b",
+      "clienteId": "3967",
+      "produto": "Super Combo",
+      "status": "Aguardando envio"
+    },
+    {
+      "id": "a95d",
+      "clienteId": "3967",
+      "produto": "Fritas Incríveis",
+      "status": "Aguardando envio"
+    },
+    {
+      "id": "ab12",
+      "clienteId": "3967",
+      "produto": "Super Combo",
+      "status": "Aguardando envio"
+    },
+    {
+      "id": "748b",
+      "clienteId": "3967",
+      "produto": "Fritas Incríveis",
+      "status": "Aguardando envio"
+    },
+    {
+      "id": "84f8",
+      "clienteId": "9964",
+      "produto": "Hambúrguer Fenomenal",
       "status": "Aguardando envio"
     }
   ]

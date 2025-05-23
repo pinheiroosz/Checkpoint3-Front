@@ -20,12 +20,12 @@ export default function Home() {
         style={{
           fontSize: "2.8rem",
           fontWeight: "bold",
-          marginBottom: "4rem",
-          marginTop: "-15rem",
+          marginBottom: "2rem",
+          marginTop: "1%",
           color: "#007bff",
         }}
       >
-        Bem-vindo ao Sistema da Lanchonete!
+        Bem-vindo ao Teteu's SteakHouse!
       </h1>
       <div
         style={{
