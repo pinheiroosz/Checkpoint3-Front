@@ -1,0 +1,67 @@
+{
+  "clientes": [
+    {
+      "id": "4137",
+      "cpf": "53163284818",
+      "nome": "Teste da Silva",
+      "cep": "04151-070",
+      "endereco": "Rua Affonso da Silva Pinheiro Júnior",
+      "numero": "60",
+      "complemento": "Casa",
+      "telefone": "99999-0000"
+    },
+    {
+      "id": "151c",
+      "cpf": "531.638.888.81",
+      "nome": "Matheus P",
+      "cep": "04151-070",
+      "endereco": "Rua Affonso da Silva Pinheiro Júnior",
+      "numero": "40",
+      "complemento": "Casa",
+      "telefone": "(11) 99110-1318"
+    },
+    {
+      "id": "4308",
+      "cpf": "531.638.888.88",
+      "nome": "Matheus Teste",
+      "cep": "04151-070",
+      "endereco": "Rua Affonso da Silva Pinheiro Júnior",
+      "numero": "60",
+      "complemento": "Casa",
+      "telefone": "(11) 99999-9999"
+    },
+    {
+      "id": "ea2f",
+      "cpf": "531.638.888.88",
+      "nome": "Matheus P",
+      "cep": "04151-070",
+      "endereco": "Rua Affonso da Silva Pinheiro Júnior",
+      "numero": "60",
+      "complemento": "Casa",
+      "telefone": "(11) 99999-9999"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "c277",
+      "clienteId": 1,
+      "nome": "Teste da Silva",
+      "produto": "Coca-Cola",
+      "status": "Enviado para entrega"
+    },
+    {
+      "id": "bab1",
+      "clienteId": 1,
+      "nome": "Teste da Silva",
+      "produto": "Fritas",
+      "status": "Enviado para entrega"
+    },
+    {
+      "id": "73dc",
+      "clienteId": "ea2f",
+      "nome": "Matheus P",
+      "produto": "Hambúrguer",
+      "status": "Enviado para entrega"
+    }
+  ]
+}
