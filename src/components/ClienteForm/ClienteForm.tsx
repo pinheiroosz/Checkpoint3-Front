@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { buscarEnderecoPorCEP } from '../../services/api/viacep';
-import { salvarCliente } from '../../services/api/jsonServer';
+import { salvarCliente, buscarClientePorCPF } from '../../services/api/jsonServer';
 import Lottie from 'react-lottie';
 import acceptedAnimation from '../../../public/lottie/accepted-blue.json';
 import './ClienteForm.css';
@@ -28,8 +28,8 @@ const formatarTelefone = (telefone: string) => {
     .replace(/(\d{5})(\d{1,4})$/, '$1-$2'); 
 };
 
-const ClienteForm: React.FC = () => {
-  const [cpf, setCpf] = useState('');
+const ClienteForm: React.FC<{ cpfInicial?: string }> = ({ cpfInicial = '' }) => {
+  const [cpf, setCpf] = useState(cpfInicial);
   const [nome, setNome] = useState('');
   const [cep, setCep] = useState('');
   const [endereco, setEndereco] = useState('');
@@ -49,9 +49,15 @@ const ClienteForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const cliente = { cpf, nome, cep, endereco, numero, complemento, telefone };
+    const cliente = { cpf: cpf.replace(/\D/g, ''), nome, cep, endereco, numero, complemento, telefone };
 
     try {
+      const clienteExistente = await buscarClientePorCPF(cliente.cpf);
+      if (clienteExistente) {
+        alert('Erro: CPF já cadastrado.');
+        return; 
+      }
+
       await salvarCliente(cliente);
       setCpf('');
       setNome('');
@@ -60,17 +66,33 @@ const ClienteForm: React.FC = () => {
       setNumero('');
       setComplemento('');
       setTelefone('');
-      setMostrarAnimacao(true); // Exibe a animação
-      setTimeout(() => setMostrarAnimacao(false), 3000); // Oculta após 3 segundos
+      setMostrarAnimacao(true);
+      setTimeout(() => setMostrarAnimacao(false), 3000); 
     } catch (error) {
       alert('Erro ao salvar cliente. Tente novamente.');
     }
   };
 
-  const handleCPFChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCPFChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
     if (/^\d*$/.test(valor.replace(/\D/g, ''))) {
       setCpf(formatarCPF(valor));
+
+      if (valor.replace(/\D/g, '').length === 11) { 
+        try {
+          const clienteExistente = await buscarClientePorCPF(valor.replace(/\D/g, ''));
+          if (clienteExistente) {
+            setNome(clienteExistente.nome || '');
+            setCep(clienteExistente.cep || '');
+            setEndereco(clienteExistente.endereco || '');
+            setNumero(clienteExistente.numero || '');
+            setComplemento(clienteExistente.complemento || '');
+            setTelefone(clienteExistente.telefone || '');
+          }
+        } catch (error) {
+          console.error('Erro ao buscar cliente:', error);
+        }
+      }
     }
   };
 
