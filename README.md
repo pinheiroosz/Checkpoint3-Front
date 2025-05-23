@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cadastro de Pedidos para Lanchonete
 
-## Getting Started
+Este é um projeto desenvolvido com **Next.js**, **React**, e **TypeScript** para gerenciar o cadastro de clientes e pedidos de uma lanchonete. O sistema utiliza o `json-server` como backend fake para simular uma API.
 
-First, run the development server:
+## Como iniciar o projeto
 
+Siga os passos abaixo para rodar o projeto localmente:
+
+### 1. Clonar o repositório
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone o repositório para sua máquina local
+$ git clone <URL_DO_REPOSITORIO>
+
+# Entre na pasta do projeto
+$ cd cadastro-pedido-lanchonete
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Instalar as dependências
+Certifique-se de que você tem o **Node.js** instalado na sua máquina. Depois, instale as dependências do projeto:
+```bash
+# Instale as dependências
+$ npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Rodar o `json-server`
+O `json-server` é usado para simular o backend. Para iniciá-lo, execute o comando abaixo:
+```bash
+# Inicie o json-server
+$ npx json-server --watch db.json --port 3001
+```
+Isso iniciará o servidor na porta `3001`. Certifique-se de que ele está rodando antes de iniciar o frontend.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Rodar o projeto Next.js
+Agora, inicie o servidor de desenvolvimento do Next.js:
+```bash
+# Inicie o servidor de desenvolvimento
+$ npm run dev
+```
+O projeto estará disponível em [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Dependências principais
+- **Next.js**: Framework React para renderização do lado do servidor.
+- **React**: Biblioteca para construção de interfaces de usuário.
+- **TypeScript**: Superset do JavaScript que adiciona tipagem estática.
+- **json-server**: Simula uma API RESTful para desenvolvimento rápido.
+- **heroicons**: Ícones para interfaces (npm install @heroicons/react).
 
-To learn more about Next.js, take a look at the following resources:
+## Estrutura do projeto
+- `db.json`: Arquivo usado pelo `json-server` para armazenar os dados de clientes e pedidos.
+- `src/components`: Contém os componentes React como `ClienteForm`, `PedidoForm` e `PedidoList`.
+- `src/services/api`: Contém os serviços para comunicação com APIs, como `jsonServer` e `ViaCEP`.
+- `src/app`: Contém as páginas principais do projeto.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Observações
+- Certifique-se de que a porta `3001` está livre para o `json-server`.
+- Caso encontre problemas, verifique os logs no terminal para identificar possíveis erros.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Espero que você curta o projeto! 🚀

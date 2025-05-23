@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { buscarEnderecoPorCEP } from '../../services/api/viacep';
 import { salvarCliente } from '../../services/api/jsonServer';
+import Lottie from 'react-lottie';
+import acceptedAnimation from '../../../public/lottie/accepted-blue.json';
 import './ClienteForm.css';
 
 const formatarCPF = (cpf: string) => {
@@ -34,6 +36,7 @@ const ClienteForm: React.FC = () => {
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [mostrarAnimacao, setMostrarAnimacao] = useState(false);
 
   const handleBuscarEndereco = async () => {
     try {
@@ -50,7 +53,6 @@ const ClienteForm: React.FC = () => {
 
     try {
       await salvarCliente(cliente);
-      alert('Cliente salvo com sucesso!');
       setCpf('');
       setNome('');
       setCep('');
@@ -58,6 +60,8 @@ const ClienteForm: React.FC = () => {
       setNumero('');
       setComplemento('');
       setTelefone('');
+      setMostrarAnimacao(true); // Exibe a animação
+      setTimeout(() => setMostrarAnimacao(false), 3000); // Oculta após 3 segundos
     } catch (error) {
       alert('Erro ao salvar cliente. Tente novamente.');
     }
@@ -85,58 +89,80 @@ const ClienteForm: React.FC = () => {
   };
 
   return (
-    <form className="cliente-form" onSubmit={handleSubmit}>
+    <>
+      <form className="cliente-form" onSubmit={handleSubmit}>
         <h1>Cadastro de Cliente</h1>
-      <div>
-        <label>CPF:</label>
-        <input
-          type="alphanumeric"
-          value={cpf}
-          onChange={handleCPFChange}
-          maxLength={14} 
-          required
-        />
-      </div>
-      <div>
-        <label>Nome Completo:</label>
-        <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
-      </div>
-      <div>
-        <label>CEP:</label>
-        <input
-          type="text"
-          value={cep}
-          onChange={handleCEPChange}
-          maxLength={9}
-          required
-        />
-        <button type="button" onClick={handleBuscarEndereco}>Buscar Endereço</button>
-      </div>
-      <div>
-        <label>Endereço:</label>
-        <input type="text" value={endereco} onChange={(e) => setEndereco(e.target.value)} required />
-      </div>
-      <div>
-        <label>Número:</label>
-        <input type="text" value={numero} onChange={(e) => setNumero(e.target.value)} required />
-      </div>
-      <div>
-        <label>Complemento:</label>
-        <input type="text" value={complemento} onChange={(e) => setComplemento(e.target.value)} />
-      </div>
-      <div>
-        <label>Telefone:</label>
-        <input
-          type="text"
-          value={telefone}
-          onChange={handleTelefoneChange}
-          placeholder="(11) 91234-5678"
-          maxLength={15}
-          required
-        />
-      </div>
-      <button type="submit">Salvar Cliente</button>
-    </form>
+        <div>
+          <label>CPF:</label>
+          <input
+            type="alphanumeric"
+            value={cpf}
+            onChange={handleCPFChange}
+            maxLength={14} 
+            required
+          />
+        </div>
+        <div>
+          <label>Nome Completo:</label>
+          <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
+        </div>
+        <div>
+          <label>CEP:</label>
+          <input
+            type="text"
+            value={cep}
+            onChange={handleCEPChange}
+            maxLength={9}
+            required
+          />
+          <button type="button" onClick={handleBuscarEndereco}>Buscar Endereço</button>
+        </div>
+        <div>
+          <label>Endereço:</label>
+          <input type="text" value={endereco} onChange={(e) => setEndereco(e.target.value)} required />
+        </div>
+        <div>
+          <label>Número:</label>
+          <input type="text" value={numero} onChange={(e) => setNumero(e.target.value)} required />
+        </div>
+        <div>
+          <label>Complemento:</label>
+          <input type="text" value={complemento} onChange={(e) => setComplemento(e.target.value)} />
+        </div>
+        <div>
+          <label>Telefone:</label>
+          <input
+            type="text"
+            value={telefone}
+            onChange={handleTelefoneChange}
+            placeholder="(11) 91234-5678"
+            maxLength={15}
+            required
+          />
+        </div>
+        <button type="submit">Salvar Cliente</button>
+      </form>
+
+      {mostrarAnimacao && (
+        <div className="animacao-overlay">
+          <div className="animacao-card">
+            <Lottie
+              options={{
+                loop: false,
+                autoplay: true,
+                animationData: acceptedAnimation,
+                rendererSettings: {
+                  preserveAspectRatio: 'xMidYMid slice',
+                },
+              }}
+              height={300}
+              width={300}
+            />
+            <p>Cliente salvo com sucesso!</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
