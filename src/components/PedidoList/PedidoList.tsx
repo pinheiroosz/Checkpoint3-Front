@@ -36,7 +36,7 @@ const PedidoList: React.FC = () => {
       <ul>
         {pedidos.map((pedido) => (
           <li key={pedido.id} className={pedido.status === 'Aguardando envio' ? 'aguardando' : 'enviado'}>
-            <p><strong>Cliente:</strong> {pedido.nome}</p>
+            <p><strong>Cliente:</strong> {pedido.clienteNome}</p>
             <p><strong>Produto:</strong> {pedido.produto}</p>
             <p><strong>Status:</strong> {pedido.status}</p>
             {pedido.status === 'Aguardando envio' && (

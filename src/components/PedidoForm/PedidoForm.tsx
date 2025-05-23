@@ -32,7 +32,7 @@ const PedidoForm: React.FC<{ clienteId: number; clienteNome: string }> = ({ clie
       return;
     }
 
-    const pedido = { clienteId, produto, status: 'Aguardando envio' };
+    const pedido = { clienteId, clienteNome, produto, status: 'Aguardando envio' };
 
     try {
       await salvarPedido(pedido);
