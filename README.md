@@ -44,6 +44,7 @@ O projeto estará disponível em [http://localhost:3000](http://localhost:3000).
 - **TypeScript**: Superset do JavaScript que adiciona tipagem estática.
 - **json-server**: Simula uma API RESTful para desenvolvimento rápido.
 - **heroicons**: Ícones para interfaces (npm install @heroicons/react).
+- **lottie**: (npm install react-lottie).
 
 ## Estrutura do projeto
 - `db.json`: Arquivo usado pelo `json-server` para armazenar os dados de clientes e pedidos.
