@@ -84,8 +84,8 @@ h1 {
 }
 
 .pedido-form.expandido button {
-  width: 40%;
-  transform: translate(70%, -180%);
+  width: 30%;
+  transform: translate(90%, -180%);
   
 }
 
@@ -97,10 +97,11 @@ h1 {
 }
 
 .pedido-form button.botao-concluido {
-  width: 50%;  
+  width: 30%;  
   background-color: #007bff; 
   color: #fff;
-  transform: scale(1); 
+  transform: translate(90%, -180%) scale(1.1);
+
   transition: all 0.5s ease;
 }
 
